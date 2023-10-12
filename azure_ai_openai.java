@@ -1,12 +1,8 @@
-import com.azure.core.credential.DefaultAzureCredential;
-import com.azure.ai.textanalytics.TextAnalyticsClient;
-import com.azure.ai.textanalytics.TextAnalyticsClientBuilder;
-import com.azure.ai.textanalytics.models.AnalyzeSentimentResult;
-import com.azure.ai.textanalytics.models.TextAnalyticsApiKeyCredential;
-import com.azure.ai.textanalytics.models.TextDocumentInput;
-import com.azure.core.util.Context;
-import com.openai.OpenAI;
-import com.openai.api.Completion;
+import com.azure.ai.openai.OpenAIClient;
+import com.azure.ai.openai.OpenAIAsyncClient;
+import com.azure.ai.openai.OpenAIClientBuilder;
+
+
 
 public class AzureOpenAIIntegration {
 
