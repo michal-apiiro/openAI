@@ -1,6 +1,8 @@
-import javax.annotation.processing.Completion;
-import javax.naming.Context;
+package com.azure.ai;
 
+import com.azure.ai.openai.OpenAIClient;
+import com.azure.ai.openai.OpenAIAsyncClient;
+import com.azure.ai.OpenAIClientBuilder;
 
 
 public class AzureOpenAIIntegration {
