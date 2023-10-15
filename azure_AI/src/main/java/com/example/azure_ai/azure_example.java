@@ -12,9 +12,9 @@ public class AzureOpenAIIntegration {
         String textAnalyticsApiKey = "YOUR_TEXT_ANALYTICS_API_KEY";
 
         TextAnalyticsClient textAnalyticsClient = new TextAnalyticsClientBuilder()
-            .endpoint(textAnalyticsEndpoint)
-            .credential(new TextAnalyticsApiKeyCredential(textAnalyticsApiKey))
-            .buildClient();
+                .endpoint(textAnalyticsEndpoint)
+                .credential(new TextAnalyticsApiKeyCredential(textAnalyticsApiKey))
+                .buildClient();
 
         // OpenAI
         String openAIApiKey = "YOUR_OPENAI_API_KEY";
@@ -32,9 +32,9 @@ public class AzureOpenAIIntegration {
 
         // OpenAI text completion
         Completion.CompletionBuilder completionBuilder = Completion.builder()
-            .model("YOUR_OPENAI_MODEL_ID")
-            .prompt(openAIPrompt)
-            .maxTokens(50);
+                .model("YOUR_OPENAI_MODEL_ID")
+                .prompt(openAIPrompt)
+                .maxTokens(50);
 
         Completion completion = openAI.createCompletion(completionBuilder.build());
 
