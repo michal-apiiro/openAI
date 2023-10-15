@@ -12,14 +12,14 @@ public class AzureOpenAIIntegration {
         String textAnalyticsEndpoint = "YOUR_TEXT_ANALYTICS_ENDPOINT";
         String textAnalyticsApiKey = "YOUR_TEXT_ANALYTICS_API_KEY";
 
-        TextAnalyticsClient textAnalyticsClient = new TextAnalyticsClientBuilder()
+        OpenAIClient textAnalyticsClient = new OpenAIClient()
             .endpoint(textAnalyticsEndpoint)
             .credential(new TextAnalyticsApiKeyCredential(textAnalyticsApiKey))
             .buildClient();
 
         // OpenAI
         String openAIApiKey = "YOUR_OPENAI_API_KEY";
-        OpenAI openAI = new OpenAI(openAIApiKey);
+        OpenAIAsyncClient openAI = new OpenAIAsyncClient(openAIApiKey);
 
         // Example text for sentiment analysis and OpenAI prompt
         String textToAnalyze = "This is a test sentence for sentiment analysis.";
