@@ -5,7 +5,6 @@ import com.azure.ai.openai.OpenAIAsyncClient;
 import com.azure.ai.OpenAIClientBuilder;
 
 
-
 public class AzureOpenAIIntegration {
 
     public static void main(String[] args) {
@@ -13,14 +12,14 @@ public class AzureOpenAIIntegration {
         String textAnalyticsEndpoint = "YOUR_TEXT_ANALYTICS_ENDPOINT";
         String textAnalyticsApiKey = "YOUR_TEXT_ANALYTICS_API_KEY";
 
-        TextAnalyticsClient textAnalyticsClient = new TextAnalyticsClientBuilder()
-                .endpoint(textAnalyticsEndpoint)
-                .credential(new TextAnalyticsApiKeyCredential(textAnalyticsApiKey))
-                .buildClient();
+        OpenAIClient textAnalyticsClient = new OpenAIClient()
+            .endpoint(textAnalyticsEndpoint)
+            .credential(new TextAnalyticsApiKeyCredential(textAnalyticsApiKey))
+            .buildClient();
 
         // OpenAI
         String openAIApiKey = "YOUR_OPENAI_API_KEY";
-        OpenAI openAI = new OpenAI(openAIApiKey);
+        OpenAIAsyncClient openAI = new OpenAIAsyncClient(openAIApiKey);
 
         // Example text for sentiment analysis and OpenAI prompt
         String textToAnalyze = "This is a test sentence for sentiment analysis.";
@@ -34,9 +33,9 @@ public class AzureOpenAIIntegration {
 
         // OpenAI text completion
         Completion.CompletionBuilder completionBuilder = Completion.builder()
-                .model("YOUR_OPENAI_MODEL_ID")
-                .prompt(openAIPrompt)
-                .maxTokens(50);
+            .model("YOUR_OPENAI_MODEL_ID")
+            .prompt(openAIPrompt)
+            .maxTokens(50);
 
         Completion completion = openAI.createCompletion(completionBuilder.build());
 
