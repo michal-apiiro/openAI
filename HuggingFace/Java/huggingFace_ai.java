@@ -1,4 +1,4 @@
-package com.examples;
+package HuggingFace.Java;
 import ai.djl.ModelException;
 import ai.djl.huggingface.translator.QuestionAnsweringTranslatorFactory;
 import ai.djl.inference.Predictor;

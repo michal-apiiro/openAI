@@ -1,4 +1,4 @@
-package com.azure.ai;
+package Azure_AI_files.Java;
 
 import com.azure.ai.openai.OpenAIClient;
 import com.azure.ai.openai.OpenAIAsyncClient;
