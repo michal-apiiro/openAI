@@ -1,5 +1,5 @@
-const { OpenAIClient } = require("@azure/openai");
-const { DefaultAzureCredential } = require("@azure/identity");
+import { OpenAIClient } from "@azure/openai";
+import { DefaultAzureCredential } from "@azure/identity";
 
 const client = new OpenAIClient("<endpoint>", new DefaultAzureCredential());
 const openai = client

@@ -1,4 +1,4 @@
-const { createCompletion, loadModel } = require('gpt4all');
+import { createCompletion, loadModel } from 'gpt4all';
 async function generateText() {
   // Load the GPT model
   const model = new loadModel('your-model-name', { verbose: true });

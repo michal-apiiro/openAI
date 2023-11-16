@@ -1,6 +1,6 @@
-const {ModelServiceClient} = require('@google-cloud/aiplatform');
-const aiplatform = require('@google-cloud/aiplatform');
-const {PipelineServiceClient} = aiplatform.v1;
+import { ModelServiceClient } from '@google-cloud/aiplatform';
+import { v1 } from '@google-cloud/aiplatform';
+const {PipelineServiceClient} = v1;
 
 
 const clientOptions = {
