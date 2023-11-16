@@ -1,41 +1,28 @@
-import * as fs from "fs";
-import * as yaml from "js-yaml";
-import { OpenAI } from "langchain/llms/openai";
-import { JsonSpec, JsonObject } from "langchain/tools";
-import { createOpenApiAgent, OpenApiToolkit } from "langchain/agents";
+const { OpenAIClient } = require("@azure/openai");
+const { DefaultAzureCredential } = require("@azure/identity");
 
-export const run = async () => {
-  let data: JsonObject;
-  try {
-    const yamlFile = fs.readFileSync("openai_openapi.yaml", "utf8");
-    data = yaml.load(yamlFile) as JsonObject;
-    if (!data) {
-      throw new Error("Failed to load OpenAPI spec");
+async function main(){
+  const endpoint = "https://myaccount.openai.azure.com/";
+  const client = new OpenAIClient(endpoint, new DefaultAzureCredential());
+
+  const deploymentId = "gpt-35-turbo";
+
+  const messages = [
+    { role: "system", content: "You are a helpful assistant. You will talk like a pirate." },
+    { role: "user", content: "Can you help me?" },
+    { role: "assistant", content: "Arrrr! Of course, me hearty! What can I do for ye?" },
+    { role: "user", content: "What's the best way to train a parrot?" },
+  ];
+
+  console.log(`Messages: ${messages.map((m) => m.content).join("\n")}`);
+
+  const events = client.listChatCompletions(deploymentId, messages, { maxTokens: 128 });
+  for await (const event of events) {
+    for (const choice of event.choices) {
+      const delta = choice.delta?.content;
+      if (delta !== undefined) {
+        console.log(`Chatbot: ${delta}`);
+      }
     }
-  } catch (e) {
-    console.error(e);
-    return;
   }
-
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-  };
-  const model = new OpenAI({ temperature: 0 });
-  const toolkit = new OpenApiToolkit(new JsonSpec(data), model, headers);
-  const executor = createOpenApiAgent(model, toolkit);
-
-  const input = `Make a POST request to openai /completions. The prompt should be 'tell me a joke.'`;
-  console.log(`Executing with input "${input}"...`);
-
-  const result = await executor.call({ input });
-  console.log(`Got output ${result.output}`);
-
-  console.log(
-    `Got intermediate steps ${JSON.stringify(
-      result.intermediateSteps,
-      null,
-      2
-    )}`
-  );
-};
+}
